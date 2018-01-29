@@ -1,0 +1,34 @@
+def hleft(i):
+	return 2*i+1
+
+def hright(i):
+	return 2*i+2
+
+def hparent(i):
+	return int((i-1)/2)
+
+def max_heapify(A,i):
+	l = hleft(i)
+	r = hright(i)
+	if l < len(A) and A[l]> A[i]:
+		largest = l
+	else:
+		largest = i
+	if r < len(A) and A[r]>A[largest]:
+		largest = r
+	if largest != i:
+		j = A[i]
+		A[i] = A[largest]
+		A[largest] = j
+		j = None
+		max_heapify(A,largest)
+
+def build_max_heap(A):
+	for i in range(int(len(A)/2)-1,-1,-1):
+		max_heapify(A,i)
+
+def heap_sort(A):
+	build_max_heap(A)
+	for i in range(len(A)-1,0,-1):
+		A[0],A[i] = A[i],A[o]
+		build_max_heap(A[:i])

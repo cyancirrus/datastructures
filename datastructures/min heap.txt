@@ -1,0 +1,47 @@
+class min_heap:
+	def __init__(self,array:list):
+		self.array = array
+		self.heap_size = len(self.array)
+		self.length = len(self.array)
+	def left(self,i):
+		return 2*i+1
+	def right(self,i):
+		return 2*i+2
+	def parent(self,i):
+		return int((i-1)/2)
+	def build_min_heap(self):
+		for i in range(int((self.length-1)/2),-1,-1):
+			self.min_heapify(i)
+	def min_heapify(self,i):
+		l = self.left(i)
+		r = self.right(i)
+		if l < self.heap_size and self.array[i] > self.array[l]:
+			smallest = l
+		else:
+			smallest = i
+		if r < self.heap_size and self.array[smallest] > self.array[r]:
+			smallest = r
+
+		if smallest != i:
+			self.array[i],self.array[smallest] = \
+			self.array[smallest],self.array[i]
+			self.min_heapify(smallest)
+	def heap_sort(self):
+		self.build_min_heap()
+		for i in range(self.length-1,0,-1):
+			self.array[i],self.array[0] = \
+			self.array[0],self.array[i]
+			self.heap_size -= 1
+			self.min_heapify(0)
+	def insert(self,x):
+		self.array = [x] + self.array
+		self.heap_size += 1
+		self.length +=1
+		self.min_heapify(0)
+	def extract_min(self):
+		minimum = self.array[0]
+		self.array[0],self.array[self.heap_size-1] = \
+		self.array[self.heap_size -1],self.array[0]
+		self.heap_size -= 1
+		self.min_heapify(0)
+		return minimum

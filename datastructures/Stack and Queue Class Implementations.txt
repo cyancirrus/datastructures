@@ -1,0 +1,43 @@
+class queue:
+	head = 0
+	tail = 0
+	def __init__(self,n):
+		self.queue = [None]*n
+	def enqueue(self,x):
+		self.queue[self.tail]=x
+		if self.tail == len(self.queue)-1:
+			self.tail = 0
+		else:
+			self.tail +=1
+	def dequeue(self):
+		x = self.queue[self.head]
+		if self.head == len(self.queue)-1:
+			self.head = 0
+		else:
+			self.head +=1
+		return x
+
+
+class stack:
+	top = 0
+	def __init__(self,n):
+		self.stack = [None]*n
+		self.n = n
+
+	def stack_empty(self):
+		if self.top == 0:
+			return True
+		else:
+			False
+	def pop(self):
+		if self.stack_empty():
+			return 'underflow'
+		else:
+			self.top-=1
+			return self.stack[self.top]
+	def push(self,x):
+		if self.top == self.n:
+			return 'overflow'
+		else:
+			self.stack[self.top] = x
+			self.top+=1

@@ -1,0 +1,59 @@
+class node:
+	def __init__(self):
+		self.parent = None
+		self.right = None
+		self.left = None
+		self.right_sibling = None
+		self.left_sibling = None
+		self.data = None
+class general_tree:
+	def __init__self(self):
+		self.cur_node = None
+		self.root = None
+	def set_root(self,data):
+		New_Node = node()
+		New_Node.data = data
+		self.cur_node = New_Node
+		self.root = New_Node
+	def add_left(self,data):
+		New_Node = node()
+		New_Node.data = data
+		self.cur_node.left = New_Node
+		self.cur_node.right = New_Node
+		New_Node.parent = self.cur_node
+	def add_right(self,data):
+		New_Node = node()
+		New_Node.data = data
+		New_Node.parent = self.cur_node
+		New_Node.left_sibling = self.cur_node.right
+		self.cur_node.right.right_sibling = New_Node
+		self.cur_node.right = New_Node
+	def add_node(self,data):
+		if not(self.cur_node.left):
+			self.add_left(data)
+		else:
+			self.add_right(data)
+	def move_left_child(self):
+		self.cur_node = self.cur_node.left
+	def move_right(self):
+		self.cur_node = self.cur_node.right_sibling
+	def move_left(self):
+		self.cur_node = self.cur_node.left_sibling
+	def move_up(self):
+		self.cur_node = self.cur_node.parent
+	def explore_tree(self,x):
+		print(x.data)
+		if x.left:
+			self.explore_tree(x.left)
+		if x.right_sibling:
+			self.explore_tree(x.right_sibling)
+	def search_tree(self, x, i):
+		if x and x.data != i:
+        	left = self.search_tree(x.left, i)
+        	if left:
+            		return left
+        	right = self.search_tree(x.right, i)
+        	if right
+            		return right
+		else:
+			return x 
