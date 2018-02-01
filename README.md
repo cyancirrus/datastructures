@@ -1,3 +1,4 @@
 # datastructures
 
-datastructures and small projects from the text 'Introduction to Algorithms'
+learning some datastructures and algos from the text
+'Introduction to Algorithms'
